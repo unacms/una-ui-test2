@@ -1,10 +1,10 @@
 {
-  "name": "cypress",
+  "name": "una-tests",
   "version": "1.0.0",
-  "description": "",
+  "description": "UNA e2e tests using Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "docker run -it -v $PWD:/e2e -w /e2e cypress/included:12.3.0"
   },
   "author": "",
   "license": "ISC",
