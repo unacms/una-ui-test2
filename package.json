@@ -4,7 +4,7 @@
   "description": "UNA e2e tests using Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "docker run -it -v $PWD:/e2e -w /e2e cypress/included:12.3.0"
+    "test": "CYPRESS_VIDEO=false docker run -it -v $PWD:/e2e -w /e2e cypress/included:12.3.0"
   },
   "author": "",
   "license": "ISC",
