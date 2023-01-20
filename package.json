@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "CYPRESS_VIDEO=false docker run -it -v $PWD:/e2e -w /e2e cypress/included:12.3.0"
+    "cy:info": "docker run -it -v $PWD:/e2e -w /e2e --entrypoint=cypress cypress/included:12.3.0 info"
   },
   "author": "",
   "license": "ISC",
