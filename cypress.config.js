@@ -20,4 +20,8 @@ module.exports = defineConfig({
       user_invalid_pwd: 'invalid',
     }
   },
+  reporter: 'cypress-multi-reporters',
+  reporterOptions: {
+    configFile: 'reporter-config.json',
+  },
 });
