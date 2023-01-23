@@ -1,24 +1,64 @@
+// vi: set ts=2 sw=2 sts=2:
+
 describe('Login', () => {
-  it('Goto to login page, login with sample data, then logout', () => {
-    cy.visit('https://ci.una.io/test3')
 
-    // click login
-    cy.get('#bx-menu-toolbar-item-login').click();
+  beforeEach(() => {
+    cy.clearCookies()
+    cy.clearLocalStorage()
+    cy.visit('/login')
+  })
 
-    // fill in form
-    cy.get('#bx-form-element-ID input').type('admin@example.com');
-    cy.get('#bx-form-element-Password input').type('unauna');
+  it('Login with valid admin credentials', () => {
+    cy.get('#bx-form-element-ID input').type(Cypress.env('user_admin_email'));
+    cy.get('#bx-form-element-Password input').type(Cypress.env('user_admin_pwd'));
+    cy.get('#bx-form-element-login button.bx-form-input-submit').click();
+    
+    // check redirect page
+    cy.get('.bx-msg-box').contains("Please Wait").should('be.visible');
+
+    // check cookies for session
+    expect(cy.getCookie('memberID')).to.be.an('object').that.is.not.empty.and.to.not.have.property('expiry');
+  })
+
+  it('Login with valid regular user credentials', () => {
+    cy.get('#bx-form-element-ID input').type(Cypress.env('user_regular_email'));
+    cy.get('#bx-form-element-Password input').type(Cypress.env('user_regular_pwd'));
     cy.get('#bx-form-element-login button.bx-form-input-submit').click();
 
-    // check if login is successfil by checking if tour is visible and then exit tour
-    cy.get('#tour-homepage-label').should('be.visible');
-    cy.get('.shepherd-button-secondary').click();
+    // check redirect page
+    cy.get('.bx-msg-box').contains("Please Wait").should('be.visible');
 
-    // logout
-    cy.get('.bx-menu-toolbar-item-title').click();
-    cy.get('.bx-menu-item-logout > a').click();
-
-    // check if logout was successful
-    cy.get('#bx-menu-toolbar-item-login').should('be.visible');
+    // check cookies for session
+    expect(cy.getCookie('memberID')).to.be.an('object').that.is.not.empty.and.to.not.have.property('expiry');
   })
+
+  it('Login with valid regular user credentials and remember me checkbox', () => {
+    cy.get('#bx-form-element-ID input').type(Cypress.env('user_regular_email'));
+    cy.get('#bx-form-element-Password input').type(Cypress.env('user_regular_pwd'));
+    cy.get('#bx-form-element-rememberMe .bx-switcher-cont').click();
+    cy.get('#bx-form-element-rememberMe input[name=rememberMe]').should('be.checked');
+
+    cy.get('#bx-form-element-login button.bx-form-input-submit').click();
+
+    // check redirect page
+    cy.get('.bx-msg-box').contains("Please Wait").should('be.visible');
+
+    // check remember me functionality
+    cy.getCookie('memberID').its('expiry').should('be.gt', 0);
+  })
+
+  it('Login with invalid user credentials', () => {
+    cy.get('#bx-form-element-ID input').type(Cypress.env('user_invalid_email'));
+    cy.get('#bx-form-element-Password input').type(Cypress.env('user_invalid_pwd'));
+    cy.get('#bx-form-element-login button.bx-form-input-submit').click();
+
+    cy.get('#bx-form-element-ID .bx-form-warn').contains('incorrect').should('be.visible');    
+  })
+
+  it('Login with empty user credentials', () => {
+    cy.get('#bx-form-element-login button.bx-form-input-submit').click();
+
+    cy.get('#bx-form-element-ID .bx-form-warn').contains('Error Occurred').should('be.visible');    
+  })
+
 })
