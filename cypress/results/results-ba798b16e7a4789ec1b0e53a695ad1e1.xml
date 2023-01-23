@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="28.245" tests="5" failures="1">
+  <testsuite name="Root Suite" timestamp="2023-01-23T12:03:41" tests="0" file="cypress/e2e/login.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Login" timestamp="2023-01-23T12:03:41" tests="5" time="28.238" failures="1">
+    <testcase name="Login Login with valid admin credentials" time="0.000" classname="Login with valid admin credentials">
+      <failure message="Timed out retrying after 4000ms: Expected to find element: `.bx-msg-box`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: Expected to find element: `.bx-msg-box`, but never found it.
+    at Context.eval (webpack:///./cypress/e2e/login.cy.js:17:7)]]></failure>
+    </testcase>
+    <testcase name="Login Login with valid regular user credentials" time="5.611" classname="Login with valid regular user credentials">
+    </testcase>
+    <testcase name="Login Login with valid regular user credentials and remember me checkbox" time="3.218" classname="Login with valid regular user credentials and remember me checkbox">
+    </testcase>
+    <testcase name="Login Login with invalid user credentials" time="3.463" classname="Login with invalid user credentials">
+    </testcase>
+    <testcase name="Login Login with empty user credentials" time="1.494" classname="Login with empty user credentials">
+    </testcase>
+  </testsuite>
+</testsuites>
