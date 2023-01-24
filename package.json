@@ -1,18 +1,13 @@
 {
-  "name": "una-tests",
+  "name": "playwright",
   "version": "1.0.0",
-  "description": "UNA e2e tests using Cypress",
+  "description": "",
   "main": "index.js",
-  "scripts": {
-    "pretest": "rm cypress/results/* || true",
-    "test": "CYPRESS_VIDEO=false docker run -it -v $PWD:/e2e -w /e2e cypress/included:12.3.0",
-    "cy:info": "docker run -it -v $PWD:/e2e -w /e2e --entrypoint=cypress cypress/included:12.3.0 info"
-  },
+  "scripts": {},
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.3.0",
-    "cypress-multi-reporters": "^1.6.2",
-    "mocha-junit-reporter": "^2.2.0"
+    "@playwright/test": "^1.29.2"
   }
 }
